@@ -1,0 +1,29 @@
+﻿<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 800'>
+  <defs>
+    <linearGradient id='bg' x1='0' y1='0' x2='1' y2='1'>
+      <stop offset='0%' stop-color='#fff8f3'/>
+      <stop offset='100%' stop-color='#ffe4d7'/>
+    </linearGradient>
+    <radialGradient id='glow' cx='50%' cy='45%' r='50%'>
+      <stop offset='0%' stop-color='#ffffff' stop-opacity='0.85'/>
+      <stop offset='100%' stop-color='#ffffff' stop-opacity='0'/>
+    </radialGradient>
+  </defs>
+  <rect width='1200' height='800' fill='url(#bg)'/>
+  <ellipse cx='600' cy='390' rx='320' ry='250' fill='url(#glow)'/>
+  <g transform='translate(600 410)'>
+    <ellipse rx='84' ry='210' fill='#ff6f7d' transform='rotate(0) translate(0 -155)'/>
+    <ellipse rx='84' ry='210' fill='#ff98a3' transform='rotate(45) translate(0 -155)'/>
+    <ellipse rx='84' ry='210' fill='#ff6f7d' transform='rotate(90) translate(0 -155)'/>
+    <ellipse rx='84' ry='210' fill='#ff98a3' transform='rotate(135) translate(0 -155)'/>
+    <ellipse rx='84' ry='210' fill='#ff6f7d' transform='rotate(180) translate(0 -155)'/>
+    <ellipse rx='84' ry='210' fill='#ff98a3' transform='rotate(225) translate(0 -155)'/>
+    <ellipse rx='84' ry='210' fill='#ff6f7d' transform='rotate(270) translate(0 -155)'/>
+    <ellipse rx='84' ry='210' fill='#ff98a3' transform='rotate(315) translate(0 -155)'/>
+    <circle r='110' fill='#ffe089'/>
+    <circle r='36' fill='#fff7cf'/>
+  </g>
+  <path d='M560 800 C560 710 565 640 575 560 C590 460 610 390 635 320' stroke='#7bbb95' stroke-width='18' fill='none' stroke-linecap='round'/>
+  <path d='M635 510 C700 500 750 540 770 600 C700 610 650 585 635 510 Z' fill='#7bbb95' opacity='0.72'/>
+  <path d='M587 560 C522 548 473 585 451 642 C523 654 571 629 587 560 Z' fill='#7bbb95' opacity='0.72'/>
+</svg>
