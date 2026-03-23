@@ -1,0 +1,16 @@
+﻿<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 420'>
+  <defs>
+    <linearGradient id='bg' x1='0' y1='0' x2='1' y2='1'>
+      <stop offset='0%' stop-color='#e79a9f'/>
+      <stop offset='100%' stop-color='#b54c62'/>
+    </linearGradient>
+  </defs>
+  <rect width='640' height='420' fill='url(#bg)'/>
+  <circle cx='210' cy='210' r='88' fill='rgba(255,255,255,0.42)'/>
+  <circle cx='320' cy='180' r='72' fill='rgba(255,255,255,0.48)'/>
+  <circle cx='412' cy='226' r='82' fill='rgba(255,255,255,0.37)'/>
+  <rect x='298' y='172' width='12' height='155' rx='6' fill='rgba(36,56,44,0.54)'/>
+  <ellipse cx='285' cy='256' rx='20' ry='13' fill='rgba(36,56,44,0.36)'/>
+  <ellipse cx='322' cy='276' rx='20' ry='13' fill='rgba(36,56,44,0.36)'/>
+  <text x='40' y='372' font-family='Manrope, Arial, sans-serif' font-size='34' font-weight='700' fill='rgba(255,255,255,0.88)'>ROSE</text>
+</svg>

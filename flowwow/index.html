@@ -1,0 +1,249 @@
+﻿<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flow Market - Minimalist Flower Delivery</title>
+    <meta
+      name="description"
+      content="Flow Market - эстетичный минималистичный маркетплейс доставки цветов. Быстрый поиск, фильтры, корзина и заказ за пару минут."
+    />
+    <meta property="og:title" content="Flow Market - Flower Marketplace" />
+    <meta
+      property="og:description"
+      content="Минималистичный магазин и маркетплейс цветов с быстрой доставкой."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="./assets/images/figma-thumbnail.png" />
+    <meta property="og:url" content="https://YOUR_USERNAME.github.io/flow-market/" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/png" href="./assets/images/mini-bouquet.png" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-wrap">
+        <a href="#hero" class="logo">
+          <img class="logo-img" src="./assets/images/logo-flow-market.svg" alt="Flow Market logo" />
+          <span>Flow Market</span>
+        </a>
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Открыть меню">
+          <span></span><span></span><span></span>
+        </button>
+        <nav class="nav" id="mainNav">
+          <a href="#catalog">Каталог</a>
+          <a href="#features">Преимущества</a>
+          <a href="#reviews">Отзывы</a>
+          <a href="#faq">FAQ</a>
+          <a href="#contacts">Контакты</a>
+        </nav>
+        <div class="header-controls">
+          <label class="city-control">
+            <span>Город</span>
+            <select id="citySelector" aria-label="Выбор города">
+              <option>Москва</option>
+              <option>Санкт-Петербург</option>
+              <option>Казань</option>
+              <option>Екатеринбург</option>
+            </select>
+          </label>
+          <button id="cartButton" class="cart-button" aria-label="Открыть корзину">
+            Корзина <span id="cartCount">0</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" id="hero">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">Минимализм + эстетика</p>
+            <h1>Цветы, которые говорят вместо слов</h1>
+            <p class="hero-text">
+              Маркетплейс свежих букетов от лучших флористов вашего города. Доставка за 1 час,
+              прозрачные рейтинги и заказ в пару кликов.
+            </p>
+            <form class="hero-search" id="searchForm">
+              <input id="searchInput" type="search" placeholder="Поиск букета, стиля или повода" />
+              <button type="submit">Найти</button>
+            </form>
+            <div class="tags">
+              <button class="tag active" data-category="all">Все</button>
+              <button class="tag" data-category="roses">Розы</button>
+              <button class="tag" data-category="peonies">Пионы</button>
+              <button class="tag" data-category="tulips">Тюльпаны</button>
+              <button class="tag" data-category="designer">Авторские</button>
+              <button class="tag" data-category="baskets">Корзины</button>
+              <button class="tag" data-category="compositions">Композиции</button>
+              <button class="tag" data-category="wedding">Свадебные</button>
+              <button class="tag" data-category="boxes">Flower Box</button>
+              <button class="tag" data-category="giftsets">Подарочные наборы</button>
+            </div>
+          </div>
+          <div class="hero-visual">
+            <img src="./assets/images/hero-bouquet.png" alt="Премиальный букет" loading="eager" />
+            <div class="metric-card">
+              <strong>12 000+</strong>
+              <span>доставок в месяц</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="categories container" id="categories">
+        <div class="section-head">
+          <h2>Категории</h2>
+          <p>Подберите букет по поводу, стилю и настроению</p>
+        </div>
+        <div class="category-grid">
+          <article class="category-card"><img src="./assets/images/catalog/cat-roses.jpg" alt="Розы" loading="lazy" /><span>Розы</span></article>
+          <article class="category-card"><img src="./assets/images/catalog/cat-peonies.jpg" alt="Пионы" loading="lazy" /><span>Пионы</span></article>
+          <article class="category-card"><img src="./assets/images/catalog/cat-tulips.jpg" alt="Тюльпаны" loading="lazy" /><span>Тюльпаны</span></article>
+          <article class="category-card"><img src="./assets/images/catalog/cat-designer.jpg" alt="Авторские" loading="lazy" /><span>Авторские букеты</span></article>
+          <article class="category-card"><img src="./assets/images/catalog/cat-compositions.jpg" alt="Композиции" loading="lazy" /><span>Композиции</span></article>
+          <article class="category-card"><img src="./assets/images/catalog/cat-baskets.jpg" alt="Корзины" loading="lazy" /><span>Корзины</span></article>
+          <article class="category-card"><img src="./assets/images/catalog/cat-wedding.jpg" alt="Свадебные" loading="lazy" /><span>Свадебные</span></article>
+          <article class="category-card"><img src="./assets/images/catalog/cat-boxes.jpg" alt="Flower Box" loading="lazy" /><span>Flower Box</span></article>
+          <article class="category-card"><img src="./assets/images/catalog/cat-giftsets.jpg" alt="Подарочные наборы" loading="lazy" /><span>Подарочные наборы</span></article>
+        </div>
+      </section>
+
+      <section class="catalog container" id="catalog">
+        <div class="section-head">
+          <h2>Популярные букеты</h2>
+          <p>Поиск, фильтры и сортировка в реальном времени</p>
+        </div>
+        <div class="catalog-tools">
+          <label>
+            Цена
+            <select id="priceFilter">
+              <option value="all">Любая</option>
+              <option value="0-5000">до 5 000 ₽</option>
+              <option value="5000-9000">5 000 - 9 000 ₽</option>
+              <option value="9000-25000">9 000+ ₽</option>
+            </select>
+          </label>
+          <label>
+            Сортировка
+            <select id="sortFilter">
+              <option value="popular">По популярности</option>
+              <option value="price-asc">Сначала дешевле</option>
+              <option value="price-desc">Сначала дороже</option>
+              <option value="rating">По рейтингу</option>
+            </select>
+          </label>
+        </div>
+        <div id="productGrid" class="product-grid" aria-live="polite"></div>
+      </section>
+
+      <section class="features" id="features">
+        <div class="container">
+          <div class="section-head">
+            <h2>Почему выбирают нас</h2>
+            <p>Быстро, аккуратно и с заботой о каждой детали</p>
+          </div>
+          <div class="feature-grid">
+            <article><h3>Доставка за 1 час</h3><p>По крупным городам в течение часа.</p></article>
+            <article><h3>Только свежие цветы</h3><p>Ежедневные поставки и проверка качества.</p></article>
+            <article><h3>Фото перед отправкой</h3><p>Вы видите реальный букет перед доставкой.</p></article>
+            <article><h3>Удобная оплата</h3><p>Быстрые и безопасные варианты оплаты.</p></article>
+            <article><h3>Рейтинг флористов</h3><p>Прозрачные отзывы и реальные оценки клиентов.</p></article>
+            <article><h3>Поддержка 24/7</h3><p>Поможем с выбором и оформлением заказа.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="reviews container" id="reviews">
+        <div class="section-head">
+          <h2>Отзывы</h2>
+          <p>Что говорят покупатели</p>
+        </div>
+        <div class="review-grid">
+          <article><h3>Анна, Москва</h3><p>Очень стильный букет, привезли за 50 минут.</p></article>
+          <article><h3>Илья, СПб</h3><p>Удобные фильтры и быстрый заказ. Супер.</p></article>
+          <article><h3>Мария, Казань</h3><p>Оформление минималистичное и очень красивое.</p></article>
+        </div>
+      </section>
+
+      <section class="cta">
+        <div class="container cta-box">
+          <div>
+            <h2>Скидка 12% на первый заказ</h2>
+            <p>Оставьте заявку и получите персональный промокод.</p>
+          </div>
+          <a href="#order" class="cta-link">Оформить заказ</a>
+        </div>
+      </section>
+
+      <section class="order container" id="order">
+        <div class="section-head">
+          <h2>Быстрый заказ</h2>
+          <p>Заполните форму, и мы свяжемся с вами</p>
+        </div>
+        <form id="orderForm" class="order-form">
+          <label>Имя <input required name="name" type="text" placeholder="Ваше имя" /></label>
+          <label>
+            Телефон
+            <input required name="phone" type="tel" placeholder="+7 (___) ___-__-__" />
+          </label>
+          <label>Дата доставки <input name="date" type="date" /></label>
+          <label>
+            Комментарий
+            <textarea name="comment" rows="3" placeholder="Пожелания к букету"></textarea>
+          </label>
+          <button type="submit">Отправить заявку</button>
+          <p id="orderMessage" class="order-message" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section class="faq container" id="faq">
+        <div class="section-head">
+          <h2>FAQ</h2>
+          <p>Частые вопросы</p>
+        </div>
+        <details><summary>Можно ли заказать на сегодня?</summary><p>Да, доступна доставка в день заказа.</p></details>
+        <details><summary>Есть ли фото перед отправкой?</summary><p>Да, отправляем фото готового букета в чат.</p></details>
+        <details><summary>Можно выбрать точное время?</summary><p>Да, при оформлении можно указать удобный интервал.</p></details>
+      </section>
+    </main>
+
+    <footer class="site-footer" id="contacts">
+      <div class="container footer-grid">
+        <div>
+          <h3>Flow Market</h3>
+          <p>Эстетичный маркетплейс доставки цветов.</p>
+        </div>
+        <div>
+          <h4>Контакты</h4>
+          <p>+7 (495) 123-45-67</p>
+          <p>hello@flowmarket.ru</p>
+        </div>
+        <div>
+          <h4>Города</h4>
+          <p>Москва, Санкт-Петербург, Казань</p>
+        </div>
+      </div>
+    </footer>
+
+    <aside id="cartDrawer" class="cart-drawer" aria-label="Корзина">
+      <div class="cart-head">
+        <h3>Корзина</h3>
+        <button id="closeCart" aria-label="Закрыть корзину">×</button>
+      </div>
+      <div id="cartItems" class="cart-items"></div>
+      <div class="cart-foot">
+        <p>Итого: <strong id="cartTotal">0 ₽</strong></p>
+        <button id="checkoutButton">Перейти к оформлению</button>
+      </div>
+    </aside>
+    <div id="overlay" class="overlay"></div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
