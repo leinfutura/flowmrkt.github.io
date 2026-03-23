@@ -1,17 +1,17 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="ru">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Floristry | Маркетплейс доставки цветов</title>
+    <title>Flow Market | Магазин цветов</title>
     <meta
       name="description"
-      content="Floristry — современный маркетплейс доставки цветов: каталог, фильтры, корзина и оформление за минуту."
+      content="Flow Market — минималистичный магазин цветов: каталог, фильтры, корзина и быстрый заказ."
     />
-    <meta property="og:title" content="Floristry | Маркетплейс доставки цветов" />
+    <meta property="og:title" content="Flow Market | Магазин цветов" />
     <meta
       property="og:description"
-      content="Премиальный дизайн, быстрый поиск букетов, рейтинги и доставка в день заказа."
+      content="Светлый минималистичный цветочный магазин с динамическим каталогом и корзиной."
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://leinfutura.github.io/flowmrkt.github.io/" />
@@ -19,24 +19,18 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
 
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <div class="bg-blur bg-blur-a" aria-hidden="true"></div>
-    <div class="bg-blur bg-blur-b" aria-hidden="true"></div>
-
     <header class="site-header" id="top">
       <div class="container nav-wrap">
         <a href="#top" class="logo" aria-label="На главную">
-          <span class="logo-mark">F</span>
-          <div>
-            <strong>Floristry</strong>
-            <small>Flower Marketplace</small>
-          </div>
+          <span class="logo-dot"></span>
+          <span>Flow Market</span>
         </a>
 
         <button id="mobileMenuButton" class="mobile-menu-button" aria-label="Открыть меню" aria-expanded="false">
@@ -65,8 +59,6 @@
           <button id="cartOpenButton" class="cart-pill" aria-label="Открыть корзину">
             Корзина <span id="cartCount">0</span>
           </button>
-          <a class="head-link" href="./account.html">Кабинет</a>
-          <a class="head-link" href="./admin.html">Admin</a>
         </div>
       </div>
     </header>
@@ -74,65 +66,41 @@
     <main>
       <section class="hero section">
         <div class="container hero-grid">
-          <div class="hero-copy">
-            <p class="eyebrow">Доставка за 60 минут</p>
-            <h1>Букеты, в которые влюбляются с первого взгляда</h1>
+          <div>
+            <p class="eyebrow">Минимализм</p>
+            <h1>Эстетичный цветочный магазин</h1>
             <p class="hero-subtitle">
-              Маркетплейс лучших флористов города: быстрый поиск, прозрачные рейтинги, красивый заказ без лишних шагов.
+              Быстрый выбор букетов, гибкие фильтры, корзина и оформление заказа за минуту.
             </p>
 
             <form id="searchForm" class="search-box" role="search">
               <input
                 id="searchInput"
                 type="search"
-                placeholder="Найти букет, стиль, повод"
+                placeholder="Поиск по букетам, стилю, поводам"
                 aria-label="Поиск"
               />
               <button type="submit">Найти</button>
             </form>
 
             <div id="heroTags" class="hero-tags" aria-label="Быстрые категории"></div>
-
-            <div class="trust-row">
-              <article>
-                <strong>12 400+</strong>
-                <span>доставок в месяц</span>
-              </article>
-              <article>
-                <strong>4.9/5</strong>
-                <span>средний рейтинг</span>
-              </article>
-              <article>
-                <strong>1 200+</strong>
-                <span>бизнес-партнеров</span>
-              </article>
-            </div>
           </div>
 
-          <aside class="hero-side">
-            <div class="hero-card hero-card-main">
-              <h3>Спецпредложение</h3>
-              <p>Скидка 15% на первый заказ и бесплатная открытка к букету.</p>
-              <a href="#order">Получить промокод</a>
+          <div class="hero-blank" aria-hidden="true">
+            <div class="hero-floating">
+              <strong>12 400+</strong>
+              <span>успешных доставок в месяц</span>
             </div>
-            <div class="hero-card">
-              <h3>Фото перед отправкой</h3>
-              <p>Показываем собранный букет до выезда курьера.</p>
-            </div>
-            <div class="hero-card">
-              <h3>Онлайн-поддержка 24/7</h3>
-              <p>Поможем выбрать букет под повод и бюджет.</p>
-            </div>
-          </aside>
+          </div>
         </div>
       </section>
 
       <section id="categories" class="section">
         <div class="container">
           <div class="section-head">
-            <p class="kicker">Категории</p>
-            <h2>Выберите настроение букета</h2>
-            <p>Популярные направления с быстрым переходом в каталог.</p>
+            <p class="kicker">Подборка</p>
+            <h2>Категории</h2>
+            <p>Чистый каталог без фото — только структура и быстрый выбор.</p>
           </div>
           <div id="categoryGrid" class="category-grid" aria-live="polite"></div>
         </div>
@@ -145,7 +113,7 @@
               <p class="kicker">Каталог</p>
               <h2>Популярные букеты</h2>
             </div>
-            <p>Фильтруйте по цене, сортируйте по рейтингу и добавляйте в корзину.</p>
+            <p>Поиск, фильтры и сортировка в реальном времени.</p>
           </div>
 
           <div class="catalog-tools">
@@ -177,13 +145,13 @@
         <div class="container">
           <div class="section-head">
             <p class="kicker">Преимущества</p>
-            <h2>Почему выбирают Floristry</h2>
+            <h2>Все для удобного заказа</h2>
           </div>
           <div class="benefit-grid">
-            <article><h3>Доставка день в день</h3><p>Курьеры работают по временным слотам без опозданий.</p></article>
-            <article><h3>Гарантия свежести</h3><p>Ежедневные поставки от проверенных поставщиков.</p></article>
-            <article><h3>Рейтинг флористов</h3><p>Прозрачные оценки и реальные отзывы клиентов.</p></article>
-            <article><h3>Гибкое оформление</h3><p>Дата, время, открытка, комментарий к заказу.</p></article>
+            <article>Доставка за 60-120 минут в крупных городах.</article>
+            <article>Свежие поставки и ручная сборка.</article>
+            <article>Подтверждение заказа перед отправкой.</article>
+            <article>Полностью адаптивный интерфейс.</article>
           </div>
         </div>
       </section>
@@ -192,20 +160,9 @@
         <div class="container">
           <div class="section-head">
             <p class="kicker">Отзывы</p>
-            <h2>Клиенты о нашем сервисе</h2>
+            <h2>Мнение клиентов</h2>
           </div>
           <div id="reviewGrid" class="review-grid"></div>
-        </div>
-      </section>
-
-      <section class="section cta-section">
-        <div class="container cta-box">
-          <div>
-            <p class="kicker">Спецпредложение</p>
-            <h2>Скидка 15% на первый заказ</h2>
-            <p>Оставьте заявку, и мы отправим персональный промокод.</p>
-          </div>
-          <a href="#order">Оформить заказ</a>
         </div>
       </section>
 
@@ -213,8 +170,8 @@
         <div class="container order-layout">
           <div>
             <p class="kicker">Оформление</p>
-            <h2>Оставьте заявку за 1 минуту</h2>
-            <p>Менеджер свяжется с вами для подтверждения и выбора интервала доставки.</p>
+            <h2>Оставьте заявку</h2>
+            <p>Мы свяжемся с вами для подтверждения состава и времени доставки.</p>
           </div>
           <form id="orderForm" class="order-form">
             <label>
@@ -252,11 +209,11 @@
             </details>
             <details>
               <summary>Можно добавить открытку?</summary>
-              <p>Да, просто укажите текст в комментарии.</p>
+              <p>Да, укажите текст в комментарии к заявке.</p>
             </details>
             <details>
-              <summary>Можно выбрать точный интервал?</summary>
-              <p>Да, мы согласуем удобный слот по времени.</p>
+              <summary>Есть выбор точного интервала?</summary>
+              <p>Да, менеджер согласует удобный временной слот.</p>
             </details>
           </div>
         </div>
@@ -266,13 +223,13 @@
     <footer id="contacts" class="site-footer">
       <div class="container footer-grid">
         <div>
-          <h3>Floristry</h3>
-          <p>Маркетплейс доставки цветов с акцентом на качество, скорость и сервис.</p>
+          <h3>Flow Market</h3>
+          <p>Минималистичный магазин цветов.</p>
         </div>
         <div>
           <h4>Контакты</h4>
-          <p>+7 (495) 123-45-67</p>
-          <p>hello@floristry.ru</p>
+          <p>+7 (495) 222-44-88</p>
+          <p>hello@flowmarket.shop</p>
         </div>
         <div>
           <h4>Города</h4>

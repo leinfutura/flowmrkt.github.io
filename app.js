@@ -1,11 +1,8 @@
-﻿const STORAGE_KEYS = {
+const STORAGE_KEYS = {
   cart: "FLOW_MARKET_V2_CART",
   city: "FLOW_MARKET_V2_CITY",
   category: "FLOW_MARKET_V2_CATEGORY"
 };
-
-const API_BASE = localStorage.getItem("FLORISTRY_API_BASE") || "http://localhost:4000/api";
-const TOKEN_KEY = "FLORISTRY_AUTH_TOKEN";
 
 const CITY_COEFFICIENTS = {
   "Москва": 1,
@@ -371,45 +368,6 @@ function onTagClick(event) {
   refreshCatalog();
 }
 
-async function createOrderViaApi(formData) {
-  const token = localStorage.getItem(TOKEN_KEY);
-  if (!token) {
-    throw new Error("Для оформления через backend войдите в личный кабинет");
-  }
-
-  if (!state.cart.length) {
-    throw new Error("Корзина пуста");
-  }
-
-  const payload = {
-    items: state.cart.map((entry) => ({ product_id: entry.id, quantity: entry.qty })),
-    delivery_date: String(formData.get("date") || ""),
-    comment: String(formData.get("comment") || ""),
-    city: state.city,
-    address: String(formData.get("comment") || "")
-  };
-
-  const response = await fetch(`${API_BASE}/orders`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`
-    },
-    body: JSON.stringify(payload)
-  });
-
-  const data = await response.json().catch(() => ({}));
-  if (!response.ok) {
-    throw new Error(data.error || "Ошибка оформления заказа");
-  }
-
-  state.cart = [];
-  saveStorage();
-  renderCart();
-  closeCart();
-  return data;
-}
-
 function attachEvents() {
   refs.searchForm.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -485,24 +443,18 @@ function attachEvents() {
     document.getElementById("order")?.scrollIntoView({ behavior: "smooth", block: "start" });
   });
 
-  refs.orderForm.addEventListener("submit", async (event) => {
+  refs.orderForm.addEventListener("submit", (event) => {
     event.preventDefault();
-    const formData = new FormData(refs.orderForm);
-    const name = String(formData.get("name") || "").trim();
-    const phone = String(formData.get("phone") || "").trim();
+    const data = new FormData(refs.orderForm);
+    const name = String(data.get("name") ?? "").trim();
+    const phone = String(data.get("phone") ?? "").trim();
 
     if (!name || phone.length < 8) {
       refs.orderMessage.textContent = "Проверьте имя и телефон.";
       return;
     }
 
-    try {
-      await createOrderViaApi(formData);
-      refs.orderMessage.textContent = "Заказ оформлен через backend API.";
-    } catch (error) {
-      refs.orderMessage.textContent = `${error.message}. Локальная заявка сохранена.`;
-    }
-
+    refs.orderMessage.textContent = "Заявка отправлена. Мы скоро свяжемся с вами.";
     refs.orderForm.reset();
   });
 

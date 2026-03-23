@@ -5,7 +5,4 @@ Thumbs.db
 
 # Node/Python local servers (optional)
 node_modules/
-__pycache__/# Backend env
-backend/.env
-backend/node_modules/
-backend/data/*.db
+__pycache__/
