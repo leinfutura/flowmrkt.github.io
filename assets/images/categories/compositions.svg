@@ -13,4 +13,8 @@
   <ellipse cx='285' cy='256' rx='20' ry='13' fill='rgba(36,56,44,0.36)'/>
   <ellipse cx='322' cy='276' rx='20' ry='13' fill='rgba(36,56,44,0.36)'/>
   <text x='40' y='372' font-family='Manrope, Arial, sans-serif' font-size='34' font-weight='700' fill='rgba(255,255,255,0.88)'>COMPOSE</text>
+<<<<<<< HEAD
 </svg>
+=======
+</svg>
+>>>>>>> 8d514c2 (Final redesign: dynamic pastel flower shop with TypeScript source)
