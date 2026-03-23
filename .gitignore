@@ -1,0 +1,8 @@
+# Local/editor artifacts
+.DS_Store
+Thumbs.db
+*.tmp
+
+# Node/Python local servers (optional)
+node_modules/
+__pycache__/
