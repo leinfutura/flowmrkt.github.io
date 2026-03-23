@@ -1,0 +1,72 @@
+﻿<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Floristry | Личный кабинет</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="section">
+      <div class="container">
+        <div class="section-head">
+          <p class="kicker">Account</p>
+          <h2>Личный кабинет</h2>
+          <p><a href="./index.html">← На главную</a></p>
+        </div>
+
+        <section class="order-layout">
+          <article class="order-form">
+            <h3>Настройка API</h3>
+            <label>API Base URL <input id="apiBaseInput" type="text" /></label>
+            <button id="saveBaseButton" type="button">Сохранить API URL</button>
+            <p id="authState" class="form-message"></p>
+          </article>
+
+          <article class="order-form">
+            <h3>Вход</h3>
+            <form id="loginForm" class="order-form">
+              <label>Email <input required name="email" type="email" /></label>
+              <label>Пароль <input required name="password" type="password" /></label>
+              <button type="submit">Войти</button>
+            </form>
+          </article>
+        </section>
+
+        <section class="order-layout">
+          <article class="order-form">
+            <h3>Регистрация</h3>
+            <form id="registerForm" class="order-form">
+              <label>Имя <input required name="name" type="text" /></label>
+              <label>Email <input required name="email" type="email" /></label>
+              <label>Пароль <input required name="password" type="password" /></label>
+              <label>Телефон <input name="phone" type="text" /></label>
+              <label>Город <input name="city" type="text" /></label>
+              <button type="submit">Создать аккаунт</button>
+            </form>
+          </article>
+
+          <article class="order-form">
+            <h3>Профиль</h3>
+            <form id="profileForm" class="order-form">
+              <label>Имя <input name="name" type="text" /></label>
+              <label>Телефон <input name="phone" type="text" /></label>
+              <label>Город <input name="city" type="text" /></label>
+              <button type="submit">Обновить профиль</button>
+            </form>
+            <button id="logoutButton" type="button">Выйти</button>
+            <p id="profileState" class="form-message"></p>
+          </article>
+        </section>
+
+        <section class="section-soft" style="padding: 20px; border-radius: 16px; border: 1px solid var(--line); margin-top: 16px;">
+          <h3>Мои заказы</h3>
+          <p id="ordersState" class="form-message"></p>
+          <div id="ordersList" class="review-grid"></div>
+        </section>
+      </div>
+    </main>
+
+    <script src="./account.js"></script>
+  </body>
+</html>

@@ -1,43 +1,73 @@
-# Flow Market
+﻿# Floristry (Full-stack)
 
-Minimalistic and aesthetic flower shop for GitHub Pages with dynamic catalog, cart, and order flow.
+Готовый full-stack проект цветочного маркетплейса:
 
-## Live URL
+- клиент: статический сайт (`index.html`) + кабинет (`account.html`) + админка (`admin.html`)
+- backend API: Node.js + Express + SQLite + JWT + роли
 
-- https://leinfutura.github.io/flowmrkt.github.io/
+## Что реализовано
 
-## Tech
+- Каталог, фильтры, корзина, оформление заказа
+- Регистрация / вход пользователей
+- Личный кабинет: профиль, список заказов
+- Админка: статистика, список пользователей, заказы, управление товарами
+- База данных SQLite с автосозданием таблиц и seed-данными
 
-- Static HTML + CSS + JavaScript for runtime
-- TypeScript source included in `app.ts`
-- LocalStorage for cart, selected city, and active category
+## Структура
 
-## Features
+- `index.html`, `app.js`, `styles.css` — storefront
+- `account.html`, `account.js` — кабинет
+- `admin.html`, `admin.js` — админ-панель
+- `backend/` — API сервер и БД
 
-- Pastel visual style with responsive layout (desktop + mobile)
-- Category gallery with flower photos
-- Live search, category filters, price filters, and sorting
-- City selector with dynamic pricing adjustment
-- Cart drawer with quantity management and persistent storage
-- Order form with client-side validation
-- Smooth reveal animations and accessible focus states
+## Запуск backend локально
 
-## Project files
+```bash
+cd backend
+cp .env.example .env
+npm install
+npm run seed
+npm run start
+```
 
-- `index.html` - page structure and SEO meta tags
-- `styles.css` - design system and responsive styles
-- `app.js` - runtime script used by GitHub Pages
-- `app.ts` - typed source version for future maintenance
+По умолчанию API: `http://localhost:4000/api`
 
-## Deploy to GitHub Pages
+Тестовый админ после `npm run seed`:
 
-1. Push all files to your repository root (`flowmrkt.github.io`).
-2. In GitHub repository settings, open `Pages`.
-3. Set source to `Deploy from a branch`.
-4. Choose branch `main` and folder `/ (root)`.
-5. Wait for GitHub Pages build and open your live URL.
+- email: `admin@floristry.local`
+- password: `admin123`
 
-## Notes
+## API эндпоинты
 
-- Category photos are included from local free-to-use assets in `assets/images/catalog`.
-- No backend required for basic operation.
+- `POST /api/auth/register`
+- `POST /api/auth/login`
+- `GET /api/auth/me`
+- `PATCH /api/account/profile`
+- `GET /api/account/orders`
+- `POST /api/orders`
+- `GET /api/products`
+
+Admin:
+
+- `GET /api/admin/stats`
+- `GET /api/admin/users`
+- `GET /api/admin/orders`
+- `PATCH /api/admin/orders/:id`
+- `GET /api/admin/products`
+- `POST /api/admin/products`
+- `PATCH /api/admin/products/:id`
+- `DELETE /api/admin/products/:id`
+
+## Важно по GitHub Pages
+
+GitHub Pages хостит только frontend. Backend нужно деплоить отдельно (Railway/Render/Fly.io/VPS).
+
+После деплоя backend:
+
+- открой `account.html`
+- укажи `API Base URL` (например `https://your-backend-domain/api`)
+- сохрани URL
+
+## Деплой frontend
+
+Frontend остается в корне репозитория (`main`, `/root`) и публикуется через GitHub Pages.
