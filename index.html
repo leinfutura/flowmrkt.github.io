@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flow Market | Aesthetic Flower Shop</title>
+    <meta
+      name="description"
+      content="Flow Market is a dynamic flower shop with pastel minimal design, live catalog filters, cart, and quick order flow for fast delivery."
+    />
+    <meta property="og:title" content="Flow Market | Aesthetic Flower Shop" />
+    <meta
+      property="og:description"
+      content="Pastel minimal flower marketplace with category gallery, dynamic catalog, and instant order form."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="./assets/images/figma-thumbnail.png" />
+    <meta property="og:url" content="https://leinfutura.github.io/flowmrkt.github.io/" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="icon" type="image/png" href="./assets/images/mini-bouquet.png" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="bg-orb bg-orb-a" aria-hidden="true"></div>
+    <div class="bg-orb bg-orb-b" aria-hidden="true"></div>
+    <div class="bg-grid" aria-hidden="true"></div>
+
+    <header class="site-header" id="top">
+      <div class="container nav-wrap">
+        <a href="#top" class="logo" aria-label="Flow Market home">
+          <img src="./assets/images/logo-flow-market.svg" alt="Flow Market logo" />
+          <span>Flow Market</span>
+        </a>
+
+        <button id="mobileMenuButton" class="mobile-menu-button" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+
+        <nav id="mainNav" class="main-nav" aria-label="Main navigation">
+          <a href="#catalog">Catalog</a>
+          <a href="#categories">Categories</a>
+          <a href="#reviews">Reviews</a>
+          <a href="#faq">FAQ</a>
+          <a href="#contacts">Contacts</a>
+        </nav>
+
+        <div class="head-controls">
+          <label class="city-picker" for="citySelect">
+            <span>City</span>
+            <select id="citySelect" name="city">
+              <option value="Moscow">Moscow</option>
+              <option value="Saint Petersburg">Saint Petersburg</option>
+              <option value="Kazan">Kazan</option>
+              <option value="Yekaterinburg">Yekaterinburg</option>
+            </select>
+          </label>
+
+          <button id="cartOpenButton" class="cart-pill" aria-label="Open shopping cart">
+            Cart <span id="cartCount">0</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero section">
+        <div class="container hero-grid">
+          <div>
+            <p class="eyebrow">Pastel Minimal Floristry</p>
+            <h1>Beautiful bouquets for every feeling.</h1>
+            <p class="hero-subtitle">
+              Dynamic flower shop with live filters, aesthetic product cards, and one-minute order flow.
+            </p>
+
+            <form id="searchForm" class="search-box" role="search">
+              <input
+                id="searchInput"
+                type="search"
+                placeholder="Search bouquets, occasions, colors"
+                aria-label="Search flowers"
+              />
+              <button type="submit">Find</button>
+            </form>
+
+            <div id="heroTags" class="hero-tags" aria-label="Quick categories"></div>
+          </div>
+
+          <div class="hero-card">
+            <img src="./assets/images/hero-bouquet.png" alt="Main bouquet in pastel style" loading="eager" />
+            <div class="hero-floating">
+              <strong>12 400+</strong>
+              <span>happy deliveries this month</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="categories" class="section">
+        <div class="container">
+          <div class="section-head">
+            <p class="kicker">Collection</p>
+            <h2>Flower Categories</h2>
+            <p>Each category has a visual mood and handpicked bouquet set.</p>
+          </div>
+          <div id="categoryGrid" class="category-grid" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <section id="catalog" class="section section-soft">
+        <div class="container">
+          <div class="section-head section-head-inline">
+            <div>
+              <p class="kicker">Live Catalog</p>
+              <h2>Popular Bouquets</h2>
+            </div>
+            <p>Search, filter, and sort in real time.</p>
+          </div>
+
+          <div class="catalog-tools">
+            <label>
+              Price
+              <select id="priceFilter">
+                <option value="all">Any</option>
+                <option value="0-4500">up to 4,500 RUB</option>
+                <option value="4500-8000">4,500 to 8,000 RUB</option>
+                <option value="8000-15000">8,000 to 15,000 RUB</option>
+              </select>
+            </label>
+            <label>
+              Sort by
+              <select id="sortFilter">
+                <option value="popular">Popularity</option>
+                <option value="price-asc">Price low to high</option>
+                <option value="price-desc">Price high to low</option>
+                <option value="rating">Rating</option>
+              </select>
+            </label>
+          </div>
+
+          <div id="productGrid" class="product-grid" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <section id="benefits" class="section">
+        <div class="container">
+          <div class="section-head">
+            <p class="kicker">Why Us</p>
+            <h2>Designed for Fast, Elegant Orders</h2>
+          </div>
+          <div class="benefit-grid">
+            <article>Delivery in 60-120 minutes in major cities.</article>
+            <article>Pastel-inspired bouquets by curated local florists.</article>
+            <article>Photo confirmation before dispatch.</article>
+            <article>Adaptive mobile-first layout and smooth checkout flow.</article>
+          </div>
+        </div>
+      </section>
+
+      <section id="reviews" class="section">
+        <div class="container">
+          <div class="section-head">
+            <p class="kicker">Social Proof</p>
+            <h2>Customer Reviews</h2>
+          </div>
+          <div id="reviewGrid" class="review-grid"></div>
+        </div>
+      </section>
+
+      <section id="order" class="section section-soft">
+        <div class="container order-layout">
+          <div>
+            <p class="kicker">Quick Checkout</p>
+            <h2>Place an Order Request</h2>
+            <p>We will contact you in a few minutes to confirm bouquet details and delivery slot.</p>
+          </div>
+          <form id="orderForm" class="order-form">
+            <label>
+              Name
+              <input required type="text" name="name" placeholder="Your name" />
+            </label>
+            <label>
+              Phone
+              <input required type="tel" name="phone" placeholder="+7 (___) ___-__-__" />
+            </label>
+            <label>
+              Delivery date
+              <input type="date" name="date" />
+            </label>
+            <label>
+              Comment
+              <textarea name="comment" rows="3" placeholder="Color palette, card text, preferences"></textarea>
+            </label>
+            <button type="submit">Send request</button>
+            <p id="orderMessage" class="form-message" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+
+      <section id="faq" class="section">
+        <div class="container">
+          <div class="section-head">
+            <p class="kicker">FAQ</p>
+            <h2>Frequently Asked Questions</h2>
+          </div>
+          <div class="faq-list">
+            <details>
+              <summary>Can I order for today?</summary>
+              <p>Yes, same-day delivery is available for most bouquets.</p>
+            </details>
+            <details>
+              <summary>Can I attach a message card?</summary>
+              <p>Yes, add your text in the comment field and we include a card for free.</p>
+            </details>
+            <details>
+              <summary>Can I see bouquet before delivery?</summary>
+              <p>Yes, we send a real photo right before courier dispatch.</p>
+            </details>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer id="contacts" class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <h3>Flow Market</h3>
+          <p>Aesthetic flower marketplace for modern gifting.</p>
+        </div>
+        <div>
+          <h4>Contacts</h4>
+          <p>+7 (495) 222-44-88</p>
+          <p>hello@flowmarket.shop</p>
+        </div>
+        <div>
+          <h4>Cities</h4>
+          <p>Moscow, Saint Petersburg, Kazan, Yekaterinburg</p>
+        </div>
+      </div>
+    </footer>
+
+    <aside id="cartDrawer" class="cart-drawer" aria-label="Shopping cart">
+      <div class="cart-head">
+        <h3>Your Cart</h3>
+        <button id="cartCloseButton" aria-label="Close cart">x</button>
+      </div>
+      <div id="cartItems" class="cart-items"></div>
+      <div class="cart-foot">
+        <p>Total: <strong id="cartTotal">0 RUB</strong></p>
+        <button id="checkoutButton" type="button">Go to checkout</button>
+      </div>
+    </aside>
+
+    <div id="overlay" class="overlay" aria-hidden="true"></div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
