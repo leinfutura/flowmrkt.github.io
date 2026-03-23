@@ -1,45 +1,58 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="ru">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Flow Market | Магазин цветов</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Flow Market — Доставка цветов</title>
     <meta
       name="description"
-      content="Flow Market — минималистичный магазин цветов: каталог, фильтры, корзина и быстрый заказ."
+      content="Flow Market — современный маркетплейс доставки цветов: быстрый поиск, фильтры, корзина и заказ за минуту."
     />
-    <meta property="og:title" content="Flow Market | Магазин цветов" />
+    <meta name="theme-color" content="#f8f2f6" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ru_RU" />
+    <meta property="og:title" content="Flow Market — Доставка цветов" />
     <meta
       property="og:description"
-      content="Светлый минималистичный цветочный магазин с динамическим каталогом и корзиной."
+      content="Подберите букет по категории и цене. Быстрое оформление заказа и удобная корзина."
     />
-    <meta property="og:type" content="website" />
     <meta property="og:url" content="https://leinfutura.github.io/flowmrkt.github.io/" />
+    <link rel="canonical" href="https://leinfutura.github.io/flowmrkt.github.io/" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
 
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
+    <a class="skip-link" href="#content">К основному контенту</a>
+
     <header class="site-header" id="top">
       <div class="container nav-wrap">
-        <a href="#top" class="logo" aria-label="На главную">
-          <span class="logo-dot"></span>
-          <span>Flow Market</span>
+        <a href="#top" class="logo" aria-label="Flow Market, на главную">
+          <span class="logo-dot" aria-hidden="true"></span>
+          <span class="logo-text">Flow Market</span>
         </a>
 
-        <button id="mobileMenuButton" class="mobile-menu-button" aria-label="Открыть меню" aria-expanded="false">
+        <button
+          id="mobileMenuButton"
+          class="mobile-menu-button"
+          aria-label="Открыть меню"
+          aria-expanded="false"
+          aria-controls="mainNav"
+          type="button"
+        >
           <span></span><span></span><span></span>
         </button>
 
         <nav id="mainNav" class="main-nav" aria-label="Основная навигация">
           <a href="#catalog">Каталог</a>
           <a href="#categories">Категории</a>
+          <a href="#benefits">Преимущества</a>
           <a href="#reviews">Отзывы</a>
           <a href="#faq">FAQ</a>
           <a href="#contacts">Контакты</a>
@@ -48,7 +61,7 @@
         <div class="head-controls">
           <label class="city-picker" for="citySelect">
             <span>Город</span>
-            <select id="citySelect" name="city">
+            <select id="citySelect" name="city" aria-label="Выбор города">
               <option value="Москва">Москва</option>
               <option value="Санкт-Петербург">Санкт-Петербург</option>
               <option value="Казань">Казань</option>
@@ -56,29 +69,29 @@
             </select>
           </label>
 
-          <button id="cartOpenButton" class="cart-pill" aria-label="Открыть корзину">
+          <button id="cartOpenButton" class="cart-pill" aria-label="Открыть корзину" type="button">
             Корзина <span id="cartCount">0</span>
           </button>
         </div>
       </div>
     </header>
 
-    <main>
-      <section class="hero section">
+    <main id="content">
+      <section class="hero section" aria-labelledby="heroTitle">
         <div class="container hero-grid">
           <div>
-            <p class="eyebrow">Минимализм</p>
-            <h1>Эстетичный цветочный магазин</h1>
+            <p class="eyebrow">Доставка в день заказа</p>
+            <h1 id="heroTitle">Эстетичный цветочный маркетплейс</h1>
             <p class="hero-subtitle">
-              Быстрый выбор букетов, гибкие фильтры, корзина и оформление заказа за минуту.
+              Выбирайте букеты по категории и цене. Добавляйте в корзину и оформляйте заказ в пару шагов.
             </p>
 
-            <form id="searchForm" class="search-box" role="search">
+            <form id="searchForm" class="search-box" role="search" novalidate>
               <input
                 id="searchInput"
                 type="search"
                 placeholder="Поиск по букетам, стилю, поводам"
-                aria-label="Поиск"
+                aria-label="Поиск по каталогу"
               />
               <button type="submit">Найти</button>
             </form>
@@ -86,37 +99,37 @@
             <div id="heroTags" class="hero-tags" aria-label="Быстрые категории"></div>
           </div>
 
-          <div class="hero-blank" aria-hidden="true">
+          <aside class="hero-blank" aria-hidden="true">
             <div class="hero-floating">
               <strong>12 400+</strong>
               <span>успешных доставок в месяц</span>
             </div>
-          </div>
+          </aside>
         </div>
       </section>
 
-      <section id="categories" class="section">
+      <section id="categories" class="section" aria-labelledby="categoriesTitle">
         <div class="container">
           <div class="section-head">
-            <p class="kicker">Подборка</p>
-            <h2>Категории</h2>
-            <p>Чистый каталог без фото — только структура и быстрый выбор.</p>
+            <p class="kicker">Категории</p>
+            <h2 id="categoriesTitle">Подборка букетов</h2>
+            <p>Быстрый переход в нужную категорию.</p>
           </div>
           <div id="categoryGrid" class="category-grid" aria-live="polite"></div>
         </div>
       </section>
 
-      <section id="catalog" class="section section-soft">
+      <section id="catalog" class="section section-soft" aria-labelledby="catalogTitle">
         <div class="container">
           <div class="section-head section-head-inline">
             <div>
               <p class="kicker">Каталог</p>
-              <h2>Популярные букеты</h2>
+              <h2 id="catalogTitle">Популярные букеты</h2>
             </div>
             <p>Поиск, фильтры и сортировка в реальном времени.</p>
           </div>
 
-          <div class="catalog-tools">
+          <div class="catalog-tools" aria-label="Фильтры каталога">
             <label>
               Цена
               <select id="priceFilter">
@@ -141,46 +154,46 @@
         </div>
       </section>
 
-      <section id="benefits" class="section">
+      <section id="benefits" class="section" aria-labelledby="benefitsTitle">
         <div class="container">
           <div class="section-head">
             <p class="kicker">Преимущества</p>
-            <h2>Все для удобного заказа</h2>
+            <h2 id="benefitsTitle">Почему выбирают нас</h2>
           </div>
           <div class="benefit-grid">
-            <article>Доставка за 60-120 минут в крупных городах.</article>
-            <article>Свежие поставки и ручная сборка.</article>
-            <article>Подтверждение заказа перед отправкой.</article>
-            <article>Полностью адаптивный интерфейс.</article>
+            <article><h3>Быстрая доставка</h3><p>В крупных городах доставляем за 60-120 минут.</p></article>
+            <article><h3>Свежие поставки</h3><p>Ежедневное обновление ассортимента и контроль качества.</p></article>
+            <article><h3>Прозрачный рейтинг</h3><p>Реальные оценки букетов и флористов.</p></article>
+            <article><h3>Удобный заказ</h3><p>Минимум шагов до оформления.</p></article>
           </div>
         </div>
       </section>
 
-      <section id="reviews" class="section">
+      <section id="reviews" class="section" aria-labelledby="reviewsTitle">
         <div class="container">
           <div class="section-head">
             <p class="kicker">Отзывы</p>
-            <h2>Мнение клиентов</h2>
+            <h2 id="reviewsTitle">Что говорят клиенты</h2>
           </div>
           <div id="reviewGrid" class="review-grid"></div>
         </div>
       </section>
 
-      <section id="order" class="section section-soft">
+      <section id="order" class="section section-soft" aria-labelledby="orderTitle">
         <div class="container order-layout">
           <div>
             <p class="kicker">Оформление</p>
-            <h2>Оставьте заявку</h2>
-            <p>Мы свяжемся с вами для подтверждения состава и времени доставки.</p>
+            <h2 id="orderTitle">Оставьте заявку</h2>
+            <p>Заполните форму, и мы свяжемся с вами для подтверждения заказа.</p>
           </div>
-          <form id="orderForm" class="order-form">
+          <form id="orderForm" class="order-form" novalidate>
             <label>
               Имя
-              <input required type="text" name="name" placeholder="Ваше имя" />
+              <input required type="text" name="name" placeholder="Ваше имя" autocomplete="name" />
             </label>
             <label>
               Телефон
-              <input required type="tel" name="phone" placeholder="+7 (___) ___-__-__" />
+              <input required type="tel" name="phone" placeholder="+7 (___) ___-__-__" autocomplete="tel" />
             </label>
             <label>
               Дата доставки
@@ -196,23 +209,23 @@
         </div>
       </section>
 
-      <section id="faq" class="section">
+      <section id="faq" class="section" aria-labelledby="faqTitle">
         <div class="container">
           <div class="section-head">
             <p class="kicker">FAQ</p>
-            <h2>Частые вопросы</h2>
+            <h2 id="faqTitle">Частые вопросы</h2>
           </div>
           <div class="faq-list">
             <details>
               <summary>Можно заказать на сегодня?</summary>
-              <p>Да, большинство букетов доступно с доставкой в день заказа.</p>
+              <p>Да, большинство букетов доступно в день заказа.</p>
             </details>
             <details>
               <summary>Можно добавить открытку?</summary>
-              <p>Да, укажите текст в комментарии к заявке.</p>
+              <p>Да, укажите текст в комментарии к заказу.</p>
             </details>
             <details>
-              <summary>Есть выбор точного интервала?</summary>
+              <summary>Можно выбрать точный интервал?</summary>
               <p>Да, менеджер согласует удобный временной слот.</p>
             </details>
           </div>
@@ -224,7 +237,7 @@
       <div class="container footer-grid">
         <div>
           <h3>Flow Market</h3>
-          <p>Минималистичный магазин цветов.</p>
+          <p>Минималистичный магазин доставки цветов.</p>
         </div>
         <div>
           <h4>Контакты</h4>
@@ -238,10 +251,10 @@
       </div>
     </footer>
 
-    <aside id="cartDrawer" class="cart-drawer" aria-label="Корзина">
+    <aside id="cartDrawer" class="cart-drawer" aria-label="Корзина" role="dialog" aria-modal="true">
       <div class="cart-head">
         <h3>Корзина</h3>
-        <button id="cartCloseButton" aria-label="Закрыть корзину">x</button>
+        <button id="cartCloseButton" aria-label="Закрыть корзину" type="button">x</button>
       </div>
       <div id="cartItems" class="cart-items"></div>
       <div class="cart-foot">
@@ -252,6 +265,10 @@
 
     <div id="overlay" class="overlay" aria-hidden="true"></div>
 
-    <script src="./app.js"></script>
+    <noscript>
+      <p class="noscript">Для работы фильтров, корзины и формы включите JavaScript.</p>
+    </noscript>
+
+    <script src="./app.js" defer></script>
   </body>
 </html>

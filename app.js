@@ -1,7 +1,19 @@
-const STORAGE_KEYS = {
-  cart: "FLOW_MARKET_V2_CART",
-  city: "FLOW_MARKET_V2_CITY",
-  category: "FLOW_MARKET_V2_CATEGORY"
+﻿const STORAGE_KEYS = {
+  cart: "FLOW_MARKET_CART",
+  city: "FLOW_MARKET_CITY",
+  category: "FLOW_MARKET_CATEGORY"
+};
+
+const CATEGORY_IMAGE_MAP = {
+  roses: "./assets/images/generated/flower-1.svg",
+  peonies: "./assets/images/generated/flower-2.svg",
+  tulips: "./assets/images/generated/flower-3.svg",
+  designer: "./assets/images/generated/flower-4.svg",
+  baskets: "./assets/images/generated/flower-5.svg",
+  compositions: "./assets/images/generated/flower-6.svg",
+  wedding: "./assets/images/generated/flower-7.svg",
+  boxes: "./assets/images/generated/flower-8.svg",
+  giftsets: "./assets/images/generated/flower-9.svg"
 };
 
 const CITY_COEFFICIENTS = {
@@ -85,8 +97,8 @@ const refs = {
   citySelect: must("citySelect"),
   orderForm: must("orderForm"),
   orderMessage: must("orderMessage"),
-  mainNav: must("mainNav"),
-  mobileMenuButton: must("mobileMenuButton")
+  mobileMenuButton: must("mobileMenuButton"),
+  mainNav: must("mainNav")
 };
 
 function formatRub(value) {
@@ -94,39 +106,38 @@ function formatRub(value) {
 }
 
 function getCityAdjustedPrice(basePrice) {
-  const multiplier = CITY_COEFFICIENTS[state.city] ?? 1;
-  return Math.round(basePrice * multiplier);
+  return Math.round(basePrice * (CITY_COEFFICIENTS[state.city] || 1));
 }
 
 function getCategoryLabel(categoryId) {
-  return CATEGORIES.find((entry) => entry.id === categoryId)?.label ?? "Категория";
+  return CATEGORIES.find((entry) => entry.id === categoryId)?.label || "Категория";
 }
 
-function saveStorage() {
+function getCategoryImage(categoryId) {
+  return CATEGORY_IMAGE_MAP[categoryId] || CATEGORY_IMAGE_MAP.roses;
+}
+
+function saveState() {
   localStorage.setItem(STORAGE_KEYS.cart, JSON.stringify(state.cart));
   localStorage.setItem(STORAGE_KEYS.city, state.city);
   localStorage.setItem(STORAGE_KEYS.category, state.category);
 }
 
-function loadStorage() {
+function loadState() {
   try {
-    const savedCart = JSON.parse(localStorage.getItem(STORAGE_KEYS.cart) ?? "[]");
-    if (Array.isArray(savedCart)) {
-      state.cart = savedCart.filter((entry) => typeof entry.id === "number" && typeof entry.qty === "number");
-    }
+    const savedCart = JSON.parse(localStorage.getItem(STORAGE_KEYS.cart) || "[]");
+    state.cart = Array.isArray(savedCart)
+      ? savedCart.filter((item) => Number.isFinite(item.id) && Number.isFinite(item.qty))
+      : [];
   } catch {
     state.cart = [];
   }
 
   const savedCity = localStorage.getItem(STORAGE_KEYS.city);
-  if (savedCity && savedCity in CITY_COEFFICIENTS) {
-    state.city = savedCity;
-  }
+  if (savedCity && CITY_COEFFICIENTS[savedCity]) state.city = savedCity;
 
   const savedCategory = localStorage.getItem(STORAGE_KEYS.category);
-  if (savedCategory) {
-    state.category = savedCategory;
-  }
+  if (savedCategory) state.category = savedCategory;
 
   refs.citySelect.value = state.city;
 }
@@ -135,8 +146,8 @@ function renderHeroTags() {
   const tags = [{ id: "all", label: "Все" }, ...CATEGORIES.map((entry) => ({ id: entry.id, label: entry.label }))];
   refs.heroTags.innerHTML = tags
     .map(
-      (entry) =>
-        `<button class="hero-tag ${state.category === entry.id ? "active" : ""}" data-category="${entry.id}" type="button">${entry.label}</button>`
+      (tag) =>
+        `<button class="hero-tag ${state.category === tag.id ? "active" : ""}" data-category="${tag.id}" type="button">${tag.label}</button>`
     )
     .join("");
 }
@@ -145,7 +156,8 @@ function renderCategoryCards() {
   refs.categoryGrid.innerHTML = CATEGORIES.map((entry) => {
     const count = PRODUCTS.filter((product) => product.categoryId === entry.id).length;
     return `
-      <article class="category-card reveal">
+      <article class="category-card reveal" data-category-card="${entry.id}">
+        <img class="category-thumb" src="${getCategoryImage(entry.id)}" alt="Категория ${entry.label}" loading="lazy" decoding="async" />
         <div class="category-card-content">
           <strong>${entry.label}</strong>
           <span class="category-count">${count} шт.</span>
@@ -155,68 +167,52 @@ function renderCategoryCards() {
   }).join("");
 }
 
-function productScore(product) {
-  const priceRank = getCityAdjustedPrice(product.basePrice) / 10000;
-  return product.rating * 10 - priceRank;
-}
-
-function parsePriceRange(filter) {
-  if (filter === "all") return null;
-  const [fromText, toText] = filter.split("-");
-  const from = Number(fromText);
-  const to = Number(toText);
-  if (Number.isNaN(from) || Number.isNaN(to)) return null;
-  return [from, to];
+function parsePriceRange(value) {
+  if (value === "all") return null;
+  const [minRaw, maxRaw] = String(value).split("-");
+  const min = Number(minRaw);
+  const max = Number(maxRaw);
+  if (!Number.isFinite(min) || !Number.isFinite(max)) return null;
+  return [min, max];
 }
 
 function getFilteredProducts() {
   const query = state.query.trim().toLowerCase();
   const range = parsePriceRange(state.price);
 
-  const list = PRODUCTS.filter((product) => {
-    const matchCategory = state.category === "all" || product.categoryId === state.category;
-    if (!matchCategory) return false;
+  const filtered = PRODUCTS.filter((item) => {
+    if (state.category !== "all" && item.categoryId !== state.category) return false;
 
-    const computedPrice = getCityAdjustedPrice(product.basePrice);
-    const matchRange = !range || (computedPrice >= range[0] && computedPrice <= range[1]);
-    if (!matchRange) return false;
+    const price = getCityAdjustedPrice(item.basePrice);
+    if (range && (price < range[0] || price > range[1])) return false;
 
     if (!query) return true;
 
-    return [product.name, product.shop, getCategoryLabel(product.categoryId)].some((field) =>
+    return [item.name, item.shop, getCategoryLabel(item.categoryId)].some((field) =>
       field.toLowerCase().includes(query)
     );
   });
 
-  if (state.sort === "price-asc") {
-    list.sort((a, b) => getCityAdjustedPrice(a.basePrice) - getCityAdjustedPrice(b.basePrice));
-  }
+  if (state.sort === "price-asc") filtered.sort((a, b) => getCityAdjustedPrice(a.basePrice) - getCityAdjustedPrice(b.basePrice));
+  if (state.sort === "price-desc") filtered.sort((a, b) => getCityAdjustedPrice(b.basePrice) - getCityAdjustedPrice(a.basePrice));
+  if (state.sort === "rating") filtered.sort((a, b) => b.rating - a.rating);
+  if (state.sort === "popular") filtered.sort((a, b) => b.rating * 10 - b.basePrice / 10000 - (a.rating * 10 - a.basePrice / 10000));
 
-  if (state.sort === "price-desc") {
-    list.sort((a, b) => getCityAdjustedPrice(b.basePrice) - getCityAdjustedPrice(a.basePrice));
-  }
-
-  if (state.sort === "rating") {
-    list.sort((a, b) => b.rating - a.rating);
-  }
-
-  if (state.sort === "popular") {
-    list.sort((a, b) => productScore(b) - productScore(a));
-  }
-
-  return list;
+  return filtered;
 }
 
 function renderProductCards() {
   const items = getFilteredProducts();
+
   refs.productGrid.innerHTML = items.length
     ? items
         .map((product) => {
-          const categoryLabel = getCategoryLabel(product.categoryId);
           const price = formatRub(getCityAdjustedPrice(product.basePrice));
-          const badgeHtml = product.badge ? `<span class="category-count">${product.badge}</span>` : "";
+          const categoryLabel = getCategoryLabel(product.categoryId);
+          const badge = product.badge ? `<span class="category-count">${product.badge}</span>` : "";
           return `
             <article class="product-card reveal">
+              <img class="product-thumb" src="${getCategoryImage(product.categoryId)}" alt="${product.name}" loading="lazy" decoding="async" />
               <div class="product-body">
                 <h3>${product.name}</h3>
                 <div class="product-meta">
@@ -227,13 +223,13 @@ function renderProductCards() {
                   <strong>${price}</strong>
                   <button type="button" data-add="${product.id}">В корзину</button>
                 </div>
-                ${badgeHtml}
+                ${badge}
               </div>
             </article>
           `;
         })
         .join("")
-    : `<p>Ничего не найдено. Измените фильтры или запрос.</p>`;
+    : "<p>Ничего не найдено. Измените фильтры или поисковый запрос.</p>";
 }
 
 function renderReviews() {
@@ -253,96 +249,79 @@ function getProductById(id) {
 }
 
 function addToCart(id) {
-  const item = state.cart.find((entry) => entry.id === id);
-  if (item) {
-    item.qty += 1;
-  } else {
-    state.cart.push({ id, qty: 1 });
-  }
-  saveStorage();
+  const existing = state.cart.find((item) => item.id === id);
+  if (existing) existing.qty += 1;
+  else state.cart.push({ id, qty: 1 });
+  saveState();
   renderCart();
 }
 
-function updateCartQty(id, delta) {
+function changeCartQty(id, delta) {
   const item = state.cart.find((entry) => entry.id === id);
   if (!item) return;
-
   item.qty += delta;
-  if (item.qty <= 0) {
-    state.cart = state.cart.filter((entry) => entry.id !== id);
-  }
-
-  saveStorage();
+  if (item.qty <= 0) state.cart = state.cart.filter((entry) => entry.id !== id);
+  saveState();
   renderCart();
 }
 
 function renderCart() {
-  const count = state.cart.reduce((sum, entry) => sum + entry.qty, 0);
+  const count = state.cart.reduce((sum, item) => sum + item.qty, 0);
   const total = state.cart.reduce((sum, entry) => {
     const product = getProductById(entry.id);
-    if (!product) return sum;
-    return sum + getCityAdjustedPrice(product.basePrice) * entry.qty;
+    return sum + (product ? getCityAdjustedPrice(product.basePrice) * entry.qty : 0);
   }, 0);
 
   refs.cartCount.textContent = String(count);
   refs.cartTotal.textContent = formatRub(total);
 
-  if (!state.cart.length) {
-    refs.cartItems.innerHTML = "<p>Корзина пока пуста.</p>";
-    return;
-  }
-
-  refs.cartItems.innerHTML = state.cart
-    .map((entry) => {
-      const product = getProductById(entry.id);
-      if (!product) return "";
-      const rowPrice = formatRub(getCityAdjustedPrice(product.basePrice) * entry.qty);
-      return `
-        <article class="cart-item">
-          <div class="cart-item-top">
-            <strong>${product.name}</strong>
-            <span>${rowPrice}</span>
-          </div>
-          <div class="cart-item-controls">
-            <button type="button" data-minus="${entry.id}">-</button>
-            <span>${entry.qty}</span>
-            <button type="button" data-plus="${entry.id}">+</button>
-          </div>
-        </article>
-      `;
-    })
-    .join("");
+  refs.cartItems.innerHTML = state.cart.length
+    ? state.cart
+        .map((entry) => {
+          const product = getProductById(entry.id);
+          if (!product) return "";
+          return `
+            <article class="cart-item">
+              <div class="cart-item-top">
+                <strong>${product.name}</strong>
+                <span>${formatRub(getCityAdjustedPrice(product.basePrice) * entry.qty)}</span>
+              </div>
+              <div class="cart-item-controls">
+                <button type="button" data-minus="${entry.id}">-</button>
+                <span>${entry.qty}</span>
+                <button type="button" data-plus="${entry.id}">+</button>
+              </div>
+            </article>
+          `;
+        })
+        .join("")
+    : "<p>Корзина пока пуста.</p>";
 }
 
 function openCart() {
   refs.cartDrawer.classList.add("open");
   refs.overlay.classList.add("show");
+  refs.cartCloseButton.focus();
 }
 
 function closeCart() {
   refs.cartDrawer.classList.remove("open");
   refs.overlay.classList.remove("show");
+  refs.cartOpenButton.focus();
 }
 
-function debounce(callback, delay = 220) {
-  let timer;
+function debounce(fn, delay = 220) {
+  let timer = 0;
   return (...args) => {
-    window.clearTimeout(timer);
-    timer = window.setTimeout(() => callback(...args), delay);
+    clearTimeout(timer);
+    timer = window.setTimeout(() => fn(...args), delay);
   };
 }
 
-function refreshCatalog() {
-  renderHeroTags();
-  renderProductCards();
-  saveStorage();
-  applyRevealAnimation();
-}
-
 function applyRevealAnimation() {
-  const revealNodes = Array.from(document.querySelectorAll(".reveal"));
+  const nodes = Array.from(document.querySelectorAll(".reveal"));
   if (!("IntersectionObserver" in window)) {
-    revealNodes.forEach((node) => node.classList.add("visible"));
+    nodes.forEach((node) => node.classList.add("visible"));
     return;
   }
 
@@ -358,21 +337,18 @@ function applyRevealAnimation() {
     { threshold: 0.12 }
   );
 
-  revealNodes.forEach((node) => observer.observe(node));
+  nodes.forEach((node) => observer.observe(node));
 }
 
-function onTagClick(event) {
-  const target = event.target.closest("button[data-category]");
-  if (!target) return;
-  state.category = target.dataset.category ?? "all";
-  refreshCatalog();
+function refreshCatalog() {
+  renderHeroTags();
+  renderProductCards();
+  saveState();
+  applyRevealAnimation();
 }
 
 function attachEvents() {
-  refs.searchForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    refreshCatalog();
-  });
+  refs.searchForm.addEventListener("submit", (event) => event.preventDefault());
 
   refs.searchInput.addEventListener(
     "input",
@@ -396,19 +372,21 @@ function attachEvents() {
     state.city = event.target.value;
     renderProductCards();
     renderCart();
-    saveStorage();
+    saveState();
     applyRevealAnimation();
   });
 
-  refs.heroTags.addEventListener("click", onTagClick);
+  refs.heroTags.addEventListener("click", (event) => {
+    const button = event.target.closest("button[data-category]");
+    if (!button) return;
+    state.category = button.dataset.category || "all";
+    refreshCatalog();
+  });
 
   refs.categoryGrid.addEventListener("click", (event) => {
-    const card = event.target.closest(".category-card");
+    const card = event.target.closest("[data-category-card]");
     if (!card) return;
-    const index = Array.from(refs.categoryGrid.children).indexOf(card);
-    const category = CATEGORIES[index];
-    if (!category) return;
-    state.category = category.id;
+    state.category = card.dataset.categoryCard;
     refreshCatalog();
     document.getElementById("catalog")?.scrollIntoView({ behavior: "smooth", block: "start" });
   });
@@ -416,27 +394,28 @@ function attachEvents() {
   refs.productGrid.addEventListener("click", (event) => {
     const button = event.target.closest("button[data-add]");
     if (!button) return;
-    const id = Number(button.dataset.add ?? "0");
-    if (!id) return;
-    addToCart(id);
+    addToCart(Number(button.dataset.add));
     openCart();
   });
 
   refs.cartItems.addEventListener("click", (event) => {
     const plus = event.target.closest("button[data-plus]");
     const minus = event.target.closest("button[data-minus]");
-    if (plus) {
-      updateCartQty(Number(plus.dataset.plus), 1);
-      return;
-    }
-    if (minus) {
-      updateCartQty(Number(minus.dataset.minus), -1);
-    }
+    if (plus) changeCartQty(Number(plus.dataset.plus), 1);
+    if (minus) changeCartQty(Number(minus.dataset.minus), -1);
   });
 
   refs.cartOpenButton.addEventListener("click", openCart);
   refs.cartCloseButton.addEventListener("click", closeCart);
   refs.overlay.addEventListener("click", closeCart);
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      refs.mainNav.classList.remove("open");
+      refs.mobileMenuButton.setAttribute("aria-expanded", "false");
+      closeCart();
+    }
+  });
 
   refs.checkoutButton.addEventListener("click", () => {
     closeCart();
@@ -446,15 +425,15 @@ function attachEvents() {
   refs.orderForm.addEventListener("submit", (event) => {
     event.preventDefault();
     const data = new FormData(refs.orderForm);
-    const name = String(data.get("name") ?? "").trim();
-    const phone = String(data.get("phone") ?? "").trim();
+    const name = String(data.get("name") || "").trim();
+    const phone = String(data.get("phone") || "").trim();
 
     if (!name || phone.length < 8) {
       refs.orderMessage.textContent = "Проверьте имя и телефон.";
       return;
     }
 
-    refs.orderMessage.textContent = "Заявка отправлена. Мы скоро свяжемся с вами.";
+    refs.orderMessage.textContent = "Спасибо! Заявка отправлена.";
     refs.orderForm.reset();
   });
 
@@ -465,7 +444,7 @@ function attachEvents() {
 }
 
 function init() {
-  loadStorage();
+  loadState();
   renderHeroTags();
   renderCategoryCards();
   renderProductCards();
