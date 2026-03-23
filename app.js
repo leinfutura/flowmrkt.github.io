@@ -5,49 +5,49 @@ const STORAGE_KEYS = {
 };
 
 const CITY_COEFFICIENTS = {
-  "Москва": 1,
-  "Санкт-Петербург": 1.04,
-  "Казань": 0.95,
-  "Екатеринбург": 0.93
+  "РњРѕСЃРєРІР°": 1,
+  "РЎР°РЅРєС‚-РџРµС‚РµСЂР±СѓСЂРі": 1.04,
+  "РљР°Р·Р°РЅСЊ": 0.95,
+  "Р•РєР°С‚РµСЂРёРЅР±СѓСЂРі": 0.93
 };
 
 const CATEGORIES = [
-  { id: "roses", label: "Розы" },
-  { id: "peonies", label: "Пионы" },
-  { id: "tulips", label: "Тюльпаны" },
-  { id: "designer", label: "Авторские" },
-  { id: "baskets", label: "Корзины" },
-  { id: "compositions", label: "Композиции" },
-  { id: "wedding", label: "Свадебные" },
+  { id: "roses", label: "Р РѕР·С‹" },
+  { id: "peonies", label: "РџРёРѕРЅС‹" },
+  { id: "tulips", label: "РўСЋР»СЊРїР°РЅС‹" },
+  { id: "designer", label: "РђРІС‚РѕСЂСЃРєРёРµ" },
+  { id: "baskets", label: "РљРѕСЂР·РёРЅС‹" },
+  { id: "compositions", label: "РљРѕРјРїРѕР·РёС†РёРё" },
+  { id: "wedding", label: "РЎРІР°РґРµР±РЅС‹Рµ" },
   { id: "boxes", label: "Flower Box" },
-  { id: "giftsets", label: "Подарочные наборы" }
+  { id: "giftsets", label: "РџРѕРґР°СЂРѕС‡РЅС‹Рµ РЅР°Р±РѕСЂС‹" }
 ];
 
 const PRODUCTS = [
-  { id: 1, name: "Rosa Cloud", categoryId: "roses", basePrice: 4100, rating: 4.9, shop: "Bloom Atelier", badge: "Хит" },
+  { id: 1, name: "Rosa Cloud", categoryId: "roses", basePrice: 4100, rating: 4.9, shop: "Bloom Atelier", badge: "РҐРёС‚" },
   { id: 2, name: "Rose Garden", categoryId: "roses", basePrice: 7200, rating: 4.8, shop: "Rose Crafters" },
-  { id: 3, name: "Peony Air", categoryId: "peonies", basePrice: 6900, rating: 4.8, shop: "Mira Flowers", badge: "Новинка" },
+  { id: 3, name: "Peony Air", categoryId: "peonies", basePrice: 6900, rating: 4.8, shop: "Mira Flowers", badge: "РќРѕРІРёРЅРєР°" },
   { id: 4, name: "Spring Peony", categoryId: "peonies", basePrice: 6350, rating: 4.7, shop: "Mira Flowers" },
   { id: 5, name: "Tulip Story", categoryId: "tulips", basePrice: 4600, rating: 4.6, shop: "Flowline" },
   { id: 6, name: "Sun Tulips", categoryId: "tulips", basePrice: 4200, rating: 4.5, shop: "Flowline" },
-  { id: 7, name: "White Morning", categoryId: "designer", basePrice: 10200, rating: 4.9, shop: "Atelier 24", badge: "Хит" },
+  { id: 7, name: "White Morning", categoryId: "designer", basePrice: 10200, rating: 4.9, shop: "Atelier 24", badge: "РҐРёС‚" },
   { id: 8, name: "Nude Palette", categoryId: "designer", basePrice: 11800, rating: 5, shop: "Atelier 24" },
   { id: 9, name: "Basket Meadow", categoryId: "baskets", basePrice: 7700, rating: 4.7, shop: "Baskette" },
   { id: 10, name: "Warm Basket", categoryId: "baskets", basePrice: 8050, rating: 4.8, shop: "Baskette" },
   { id: 11, name: "Silk Composition", categoryId: "compositions", basePrice: 9100, rating: 4.8, shop: "Forma Flora" },
-  { id: 12, name: "Soft Geometry", categoryId: "compositions", basePrice: 9700, rating: 4.9, shop: "Forma Flora", badge: "Новинка" },
+  { id: 12, name: "Soft Geometry", categoryId: "compositions", basePrice: 9700, rating: 4.9, shop: "Forma Flora", badge: "РќРѕРІРёРЅРєР°" },
   { id: 13, name: "Wedding Light", categoryId: "wedding", basePrice: 12300, rating: 4.9, shop: "Ceremony Bloom" },
   { id: 14, name: "Wedding Ivory", categoryId: "wedding", basePrice: 13700, rating: 5, shop: "Ceremony Bloom" },
   { id: 15, name: "Box Velvet", categoryId: "boxes", basePrice: 6300, rating: 4.6, shop: "Box and Bloom" },
   { id: 16, name: "Box Blush", categoryId: "boxes", basePrice: 7050, rating: 4.8, shop: "Box and Bloom" },
   { id: 17, name: "Gift Set Calm", categoryId: "giftsets", basePrice: 5600, rating: 4.6, shop: "Gift Flower Lab" },
-  { id: 18, name: "Gift Set Premium", categoryId: "giftsets", basePrice: 7900, rating: 4.8, shop: "Gift Flower Lab", badge: "Хит" }
+  { id: 18, name: "Gift Set Premium", categoryId: "giftsets", basePrice: 7900, rating: 4.8, shop: "Gift Flower Lab", badge: "РҐРёС‚" }
 ];
 
 const REVIEWS = [
-  { name: "Анна, Москва", score: 5, text: "Очень удобный сайт и быстрая доставка." },
-  { name: "Михаил, Казань", score: 5, text: "Минималистично, понятно и без лишнего." },
-  { name: "Лина, Санкт-Петербург", score: 4.9, text: "Легко выбрать букет и оформить заказ." }
+  { name: "РђРЅРЅР°, РњРѕСЃРєРІР°", score: 5, text: "РћС‡РµРЅСЊ СѓРґРѕР±РЅС‹Р№ СЃР°Р№С‚ Рё Р±С‹СЃС‚СЂР°СЏ РґРѕСЃС‚Р°РІРєР°." },
+  { name: "РњРёС…Р°РёР», РљР°Р·Р°РЅСЊ", score: 5, text: "РњРёРЅРёРјР°Р»РёСЃС‚РёС‡РЅРѕ, РїРѕРЅСЏС‚РЅРѕ Рё Р±РµР· Р»РёС€РЅРµРіРѕ." },
+  { name: "Р›РёРЅР°, РЎР°РЅРєС‚-РџРµС‚РµСЂР±СѓСЂРі", score: 4.9, text: "Р›РµРіРєРѕ РІС‹Р±СЂР°С‚СЊ Р±СѓРєРµС‚ Рё РѕС„РѕСЂРјРёС‚СЊ Р·Р°РєР°Р·." }
 ];
 
 const state = {
@@ -55,7 +55,7 @@ const state = {
   category: "all",
   price: "all",
   sort: "popular",
-  city: "Москва",
+  city: "РњРѕСЃРєРІР°",
   cart: []
 };
 
@@ -99,7 +99,7 @@ function getCityAdjustedPrice(basePrice) {
 }
 
 function getCategoryLabel(categoryId) {
-  return CATEGORIES.find((entry) => entry.id === categoryId)?.label ?? "Категория";
+  return CATEGORIES.find((entry) => entry.id === categoryId)?.label ?? "РљР°С‚РµРіРѕСЂРёСЏ";
 }
 
 function saveStorage() {
@@ -132,7 +132,7 @@ function loadStorage() {
 }
 
 function renderHeroTags() {
-  const tags = [{ id: "all", label: "Все" }, ...CATEGORIES.map((entry) => ({ id: entry.id, label: entry.label }))];
+  const tags = [{ id: "all", label: "Р’СЃРµ" }, ...CATEGORIES.map((entry) => ({ id: entry.id, label: entry.label }))];
   refs.heroTags.innerHTML = tags
     .map(
       (entry) =>
@@ -148,7 +148,7 @@ function renderCategoryCards() {
       <article class="category-card reveal">
         <div class="category-card-content">
           <strong>${entry.label}</strong>
-          <span class="category-count">${count} шт.</span>
+          <span class="category-count">${count} С€С‚.</span>
         </div>
       </article>
     `;
@@ -221,11 +221,11 @@ function renderProductCards() {
                 <h3>${product.name}</h3>
                 <div class="product-meta">
                   <span>${product.shop}</span>
-                  <span>${categoryLabel} • ${product.rating}</span>
+                  <span>${categoryLabel} вЂў ${product.rating}</span>
                 </div>
                 <div class="product-price-row">
                   <strong>${price}</strong>
-                  <button type="button" data-add="${product.id}">В корзину</button>
+                  <button type="button" data-add="${product.id}">Р’ РєРѕСЂР·РёРЅСѓ</button>
                 </div>
                 ${badgeHtml}
               </div>
@@ -233,7 +233,7 @@ function renderProductCards() {
           `;
         })
         .join("")
-    : `<p>Ничего не найдено. Измените фильтры или запрос.</p>`;
+    : `<p>РќРёС‡РµРіРѕ РЅРµ РЅР°Р№РґРµРЅРѕ. РР·РјРµРЅРёС‚Рµ С„РёР»СЊС‚СЂС‹ РёР»Рё Р·Р°РїСЂРѕСЃ.</p>`;
 }
 
 function renderReviews() {
@@ -288,7 +288,7 @@ function renderCart() {
   refs.cartTotal.textContent = formatRub(total);
 
   if (!state.cart.length) {
-    refs.cartItems.innerHTML = "<p>Корзина пока пуста.</p>";
+    refs.cartItems.innerHTML = "<p>РљРѕСЂР·РёРЅР° РїРѕРєР° РїСѓСЃС‚Р°.</p>";
     return;
   }
 
@@ -450,11 +450,11 @@ function attachEvents() {
     const phone = String(data.get("phone") ?? "").trim();
 
     if (!name || phone.length < 8) {
-      refs.orderMessage.textContent = "Проверьте имя и телефон.";
+      refs.orderMessage.textContent = "РџСЂРѕРІРµСЂСЊС‚Рµ РёРјСЏ Рё С‚РµР»РµС„РѕРЅ.";
       return;
     }
 
-    refs.orderMessage.textContent = "Заявка отправлена. Мы скоро свяжемся с вами.";
+    refs.orderMessage.textContent = "Р—Р°СЏРІРєР° РѕС‚РїСЂР°РІР»РµРЅР°. РњС‹ СЃРєРѕСЂРѕ СЃРІСЏР¶РµРјСЃСЏ СЃ РІР°РјРё.";
     refs.orderForm.reset();
   });
 
